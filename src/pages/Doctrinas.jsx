@@ -57,6 +57,15 @@ const doctrines = [
   },
 ];
 
+const distinctives = [
+  { icon: '📖', title: 'Sola Scriptura', desc: 'La Biblia es nuestra única autoridad suprema en materia de fe y práctica. Ninguna tradición o magisterio humano está por encima de la Escritura.' },
+  { icon: '✝', title: 'Solus Christus', desc: 'La salvación se encuentra únicamente en Jesucristo. Él es el único camino, la verdad y la vida (Juan 14:6).' },
+  { icon: '🎁', title: 'Sola Gratia', desc: 'La salvación es enteramente un regalo de la gracia de Dios. No hay méritos humanos que puedan contribuir a ella.' },
+  { icon: '🙌', title: 'Sola Fide', desc: 'La fe sola en Jesucristo es el medio por el cual recibimos la salvación. Las obras son el resultado de la salvación, no su causa.' },
+  { icon: '👑', title: 'Soli Deo Gloria', desc: 'Todo lo que hacemos — predicación, adoración, servicio — debe ser para la gloria de Dios solamente.' },
+  { icon: '🏛', title: 'No Denominacional', desc: 'Somos una iglesia independiente que reconoce a Cristo como cabeza y a la Biblia como constitución. No pertenecemos a ninguna denominación humana.' },
+];
+
 export default function Doctrinas() {
   return (
     <div>
@@ -71,7 +80,7 @@ export default function Doctrinas() {
       {/* Intro */}
       <section className="section-sm bg-off-white">
         <div className="container">
-          <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+          <div className="animate-on-scroll fade-in" style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
             <h2 style={{ marginBottom: '1rem' }}>Declaración de Fe</h2>
             <div className="section-divider" />
             <p style={{ fontSize: '1.05rem', lineHeight: 1.8 }}>
@@ -84,28 +93,29 @@ export default function Doctrinas() {
       {/* Doctrines */}
       <section className="section">
         <div className="container">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', maxWidth: '960px', margin: '0 auto' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '960px', margin: '0 auto' }}>
             {doctrines.map((doc, i) => (
-              <div key={i} style={{
+              <div key={i} className={`animate-on-scroll delay-${(i % 3 + 1) * 100}`} style={{
                 background: '#fff',
-                borderRadius: '1rem',
+                borderRadius: '1.25rem',
                 overflow: 'hidden',
-                boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
+                boxShadow: '0 2px 16px rgba(15,23,42,0.08)',
+                border: '1px solid rgba(15,23,42,0.06)',
                 display: 'grid',
                 gridTemplateColumns: '80px 1fr',
               }}>
                 <div style={{
-                  background: 'linear-gradient(135deg, #1a2a4a, #253d6b)',
+                  background: 'linear-gradient(145deg, #152847, #1e3a5f)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   padding: '1.5rem 0.5rem',
                 }}>
                   <span style={{
-                    fontFamily: 'Georgia, serif',
+                    fontFamily: 'var(--font-heading)',
                     fontSize: '1.5rem',
                     fontWeight: 700,
-                    color: '#c8a830',
+                    color: '#e8bf6a',
                     writingMode: 'vertical-rl',
                     textOrientation: 'mixed',
                     transform: 'rotate(180deg)',
@@ -115,13 +125,13 @@ export default function Doctrinas() {
                 </div>
                 <div style={{ padding: '2rem' }}>
                   <h3 style={{ marginBottom: '0.4rem' }}>{doc.title}</h3>
-                  <p style={{ color: '#c8a830', fontWeight: 600, fontSize: '0.95rem', marginBottom: '1rem' }}>
+                  <p style={{ color: '#c9993b', fontWeight: 600, fontSize: '0.95rem', marginBottom: '1rem' }}>
                     {doc.summary}
                   </p>
                   <p style={{ lineHeight: 1.8, marginBottom: '1rem' }}>{doc.content}</p>
                   <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                     {doc.refs.map((ref, j) => (
-                      <span key={j} className="badge badge-outline" style={{ fontSize: '0.78rem' }}>
+                      <span key={j} className="badge badge-outline" style={{ fontSize: '0.75rem' }}>
                         📖 {ref}
                       </span>
                     ))}
@@ -136,24 +146,17 @@ export default function Doctrinas() {
       {/* Distinctives */}
       <section className="section bg-off-white">
         <div className="container">
-          <div className="section-title">
+          <div className="section-title animate-on-scroll fade-in">
             <h2>Distintivos Teológicos</h2>
             <div className="section-divider" />
             <p>Principios que nos identifican como iglesia no denominacional bíblica.</p>
           </div>
           <div className="grid-3">
-            {[
-              { icon: '📖', title: 'Sola Scriptura', desc: 'La Biblia es nuestra única autoridad suprema en materia de fe y práctica. Ninguna tradición o magisterio humano está por encima de la Escritura.' },
-              { icon: '✝', title: 'Solus Christus', desc: 'La salvación se encuentra únicamente en Jesucristo. Él es el único camino, la verdad y la vida (Juan 14:6).' },
-              { icon: '🎁', title: 'Sola Gratia', desc: 'La salvación es enteramente un regalo de la gracia de Dios. No hay méritos humanos que puedan contribuir a ella.' },
-              { icon: '🙌', title: 'Sola Fide', desc: 'La fe sola en Jesucristo es el medio por el cual recibimos la salvación. Las obras son el resultado de la salvación, no su causa.' },
-              { icon: '👑', title: 'Soli Deo Gloria', desc: 'Todo lo que hacemos — predicación, adoración, servicio — debe ser para la gloria de Dios solamente.' },
-              { icon: '🏛', title: 'No Denominacional', desc: 'Somos una iglesia independiente que reconoce a Cristo como cabeza y a la Biblia como constitución. No pertenecemos a ninguna denominación humana.' },
-            ].map((item, i) => (
-              <div key={i} className="card">
+            {distinctives.map((item, i) => (
+              <div key={i} className={`card animate-on-scroll delay-${(i % 3 + 1) * 100}`}>
                 <div className="card-body" style={{ textAlign: 'center' }}>
                   <div className="card-icon">{item.icon}</div>
-                  <h4 style={{ marginBottom: '0.75rem', color: '#c8a830' }}>{item.title}</h4>
+                  <h4 style={{ marginBottom: '0.75rem', color: '#c9993b' }}>{item.title}</h4>
                   <p style={{ fontSize: '0.9rem' }}>{item.desc}</p>
                 </div>
               </div>

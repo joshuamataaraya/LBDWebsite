@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -13,9 +14,45 @@ import Doctrinas from './pages/Doctrinas';
 import Contacto from './pages/Contacto';
 import Ofrendar from './pages/Ofrendar';
 
+/** Watches for `.animate-on-scroll` elements and adds `is-visible` on viewport entry. */
+function ScrollAnimationManager() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
+    );
+
+    const observeElements = () => {
+      document
+        .querySelectorAll('.animate-on-scroll:not(.is-visible)')
+        .forEach((el) => observer.observe(el));
+    };
+
+    // Use rAF to ensure DOM is painted before observing
+    const raf = requestAnimationFrame(observeElements);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      observer.disconnect();
+    };
+  }, [location.pathname]);
+
+  return null;
+}
+
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollAnimationManager />
       <div className="app-layout">
         <Navbar />
         <main className="app-main">
@@ -37,3 +74,4 @@ export default function App() {
     </BrowserRouter>
   );
 }
+

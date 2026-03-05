@@ -1,7 +1,9 @@
+import { useState } from 'react';
+
 const events = [
   {
     category: 'Culto',
-    color: '#1a2a4a',
+    color: '#152847',
     title: 'Culto Dominical',
     date: 'Todos los domingos',
     time: '10:00 a.m.',
@@ -83,8 +85,6 @@ const events = [
 
 const categories = ['Todos', 'Culto', 'Oración', 'Discipulado', 'Jóvenes', 'Especial', 'Evangelismo', 'Educación'];
 
-import { useState } from 'react';
-
 export default function Eventos() {
   const [filter, setFilter] = useState('Todos');
 
@@ -103,7 +103,7 @@ export default function Eventos() {
       <section className="section">
         <div className="container">
           {/* Filter Tabs */}
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '2.5rem', justifyContent: 'center' }}>
+          <div className="animate-on-scroll fade-in" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '2.5rem', justifyContent: 'center' }}>
             {categories.map(cat => (
               <button
                 key={cat}
@@ -112,13 +112,14 @@ export default function Eventos() {
                   padding: '0.45rem 1.1rem',
                   borderRadius: '999px',
                   border: '2px solid',
-                  borderColor: filter === cat ? '#1a2a4a' : '#d0cfc8',
-                  background: filter === cat ? '#1a2a4a' : 'transparent',
-                  color: filter === cat ? '#fff' : '#4a4a4a',
+                  borderColor: filter === cat ? '#152847' : '#cbd5e1',
+                  background: filter === cat ? 'linear-gradient(145deg, #152847, #1e3a5f)' : 'transparent',
+                  color: filter === cat ? '#fff' : '#475569',
                   fontSize: '0.875rem',
                   fontWeight: 600,
                   cursor: 'pointer',
-                  transition: 'all 0.2s',
+                  transition: 'all 0.25s ease',
+                  fontFamily: 'var(--font-body)',
                 }}
               >
                 {cat}
@@ -128,15 +129,19 @@ export default function Eventos() {
 
           <div className="grid-2">
             {filtered.map((event, i) => (
-              <div key={i} style={{
+              <div key={i} className={`animate-on-scroll delay-${(i % 2 + 1) * 100}`} style={{
                 background: '#fff',
-                borderRadius: '1rem',
+                borderRadius: '1.25rem',
                 overflow: 'hidden',
-                boxShadow: '0 2px 10px rgba(0,0,0,0.08)',
-                border: '1px solid #f0efea',
+                boxShadow: '0 2px 14px rgba(15,23,42,0.08)',
+                border: '1px solid rgba(15,23,42,0.06)',
                 display: 'flex',
                 flexDirection: 'column',
-              }}>
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+              }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 12px 36px rgba(15,23,42,0.13)'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 2px 14px rgba(15,23,42,0.08)'; }}
+              >
                 <div style={{ height: '6px', background: event.color }} />
                 <div style={{ padding: '1.75rem', flex: 1 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem', gap: '0.5rem' }}>
@@ -144,20 +149,20 @@ export default function Eventos() {
                       {event.category}
                     </span>
                     {event.recurring && (
-                      <span className="badge" style={{ background: '#f0efea', color: '#666', fontSize: '0.72rem' }}>
+                      <span className="badge" style={{ background: '#f1f5f9', color: '#64748b', fontSize: '0.72rem' }}>
                         Recurrente
                       </span>
                     )}
                   </div>
                   <h4 style={{ marginBottom: '0.75rem' }}>{event.title}</h4>
-                  <p style={{ fontSize: '0.9rem', marginBottom: '1rem', lineHeight: 1.6 }}>{event.desc}</p>
+                  <p style={{ fontSize: '0.9rem', marginBottom: '1rem', lineHeight: 1.65 }}>{event.desc}</p>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                     {[
                       { icon: '📅', val: event.date },
                       { icon: '🕐', val: event.time },
                       { icon: '📍', val: event.location },
                     ].map((info, j) => (
-                      <div key={j} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', color: '#4a4a4a' }}>
+                      <div key={j} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', color: '#475569' }}>
                         <span style={{ flexShrink: 0 }}>{info.icon}</span>
                         <span>{info.val}</span>
                       </div>
@@ -169,7 +174,7 @@ export default function Eventos() {
           </div>
 
           {filtered.length === 0 && (
-            <div style={{ textAlign: 'center', padding: '4rem', color: '#999' }}>
+            <div style={{ textAlign: 'center', padding: '4rem', color: '#94a3b8' }}>
               <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>📅</div>
               <p>No hay eventos en esta categoría por el momento.</p>
             </div>
@@ -177,10 +182,20 @@ export default function Eventos() {
         </div>
       </section>
 
-      <section className="section-sm" style={{ background: '#1a2a4a', textAlign: 'center' }}>
-        <div className="container">
+      <section className="section-sm" style={{
+        background: 'linear-gradient(145deg, #152847, #1e3a5f)',
+        textAlign: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'radial-gradient(ellipse at center, rgba(201,153,59,0.1) 0%, transparent 65%)',
+          pointerEvents: 'none',
+        }} />
+        <div className="container" style={{ position: 'relative' }}>
           <h3 style={{ color: '#fff', marginBottom: '0.75rem' }}>¿Preguntas sobre algún evento?</h3>
-          <p style={{ color: 'rgba(255,255,255,0.75)', marginBottom: '1.5rem' }}>
+          <p style={{ color: 'rgba(255,255,255,0.68)', marginBottom: '1.5rem' }}>
             Contáctenos para más información sobre actividades específicas.
           </p>
           <a href="mailto:info@labibliadicecr.org" className="btn btn-primary">

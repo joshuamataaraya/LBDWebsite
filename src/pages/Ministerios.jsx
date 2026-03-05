@@ -70,9 +70,12 @@ export default function Ministerios() {
         </div>
       </section>
 
-      <section className="section-sm" style={{ background: '#c8a830', textAlign: 'center' }}>
+      <section className="section-sm" style={{
+        background: 'linear-gradient(135deg, #c9993b 0%, #e8bf6a 100%)',
+        textAlign: 'center',
+      }}>
         <div className="container">
-          <p style={{ color: '#0f1d35', fontSize: '1.05rem', fontWeight: 500, marginBottom: 0 }}>
+          <p style={{ color: '#0b1727', fontSize: '1.05rem', fontWeight: 500, marginBottom: 0 }}>
             "Dios ha dado a cada creyente un don espiritual para el beneficio del Cuerpo de Cristo (1 Corintios 12:4-7). ¡Descubra el suyo!"
           </p>
         </div>
@@ -82,12 +85,16 @@ export default function Ministerios() {
         <div className="container">
           <div className="grid-2">
             {ministerios.map((m, i) => (
-              <div key={i} className="card" style={{ borderTop: `4px solid ${m.color}` }}>
+              <div
+                key={i}
+                className={`card animate-on-scroll delay-${(i % 2 + 1) * 100}`}
+                style={{ borderTop: `4px solid ${m.color}` }}
+              >
                 <div className="card-body">
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '1rem' }}>
                     <div style={{
                       width: '52px', height: '52px', flexShrink: 0,
-                      background: `${m.color}20`, borderRadius: '0.75rem',
+                      background: `${m.color}22`, borderRadius: '0.9rem',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       fontSize: '1.5rem',
                     }}>
@@ -98,7 +105,7 @@ export default function Ministerios() {
                   <p style={{ fontSize: '0.95rem', marginBottom: '1rem' }}>{m.desc}</p>
                   <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                     {m.details.map((d, j) => (
-                      <li key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.875rem', color: '#4a4a4a' }}>
+                      <li key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.875rem', color: '#475569' }}>
                         <span style={{ color: m.color, fontWeight: 700, flexShrink: 0 }}>✓</span>
                         {d}
                       </li>
@@ -112,13 +119,26 @@ export default function Ministerios() {
       </section>
 
       {/* Get Involved */}
-      <section className="section" style={{ background: 'linear-gradient(135deg, #0f1d35, #1a2a4a)', textAlign: 'center' }}>
-        <div className="container">
-          <h2 style={{ color: '#fff', marginBottom: '1rem' }}>¿Cómo Puedo Servir?</h2>
-          <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '1.05rem', maxWidth: '560px', margin: '0 auto 2rem' }}>
-            Creemos que cada creyente tiene un don y un llamado. Le invitamos a descubrir cómo Dios le quiere usar en el Cuerpo de Cristo.
-          </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+      <section className="section" style={{
+        background: 'linear-gradient(145deg, #0b1727, #152847)',
+        textAlign: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'radial-gradient(ellipse at center, rgba(201,153,59,0.1) 0%, transparent 65%)',
+          pointerEvents: 'none',
+        }} />
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <div className="animate-on-scroll fade-in">
+            <h2 style={{ color: '#fff', marginBottom: '1rem' }}>¿Cómo Puedo Servir?</h2>
+            <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: '1.05rem', maxWidth: '560px', margin: '0 auto 2rem' }}>
+              Creemos que cada creyente tiene un don y un llamado. Le invitamos a descubrir cómo Dios le quiere usar en el Cuerpo de Cristo.
+            </p>
+          </div>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}
+            className="animate-on-scroll delay-200">
             <Link to="/contacto" className="btn btn-primary btn-lg">Quiero Servir</Link>
             <Link to="/planifica-tu-visita" className="btn btn-secondary btn-lg">Visítenos</Link>
           </div>
@@ -127,3 +147,4 @@ export default function Ministerios() {
     </div>
   );
 }
+

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 const navLinks = [
@@ -22,9 +22,20 @@ const socialLinks = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <nav className="navbar" role="navigation" aria-label="Navegación principal">
+    <nav
+      className={`navbar${scrolled ? ' scrolled' : ''}`}
+      role="navigation"
+      aria-label="Navegación principal"
+    >
       <div className="navbar-inner">
         <Link to="/" className="navbar-brand" onClick={() => setMenuOpen(false)}>
           <span className="navbar-brand-name">Iglesia La Biblia Dice</span>
@@ -107,3 +118,4 @@ export default function Navbar() {
     </nav>
   );
 }
+

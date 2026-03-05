@@ -96,20 +96,21 @@ export default function Sermones() {
       {/* Featured Sermon */}
       <section className="section bg-off-white">
         <div className="container">
-          <div className="section-title">
+          <div className="section-title animate-on-scroll fade-in">
             <span className="badge badge-gold" style={{ marginBottom: '0.75rem' }}>Mensaje Reciente</span>
             <h2>Último Sermón</h2>
             <div className="section-divider" />
           </div>
-          <div style={{ maxWidth: '860px', margin: '0 auto' }}>
+          <div style={{ maxWidth: '860px', margin: '0 auto' }} className="animate-on-scroll">
             <div style={{
-              background: '#fff', borderRadius: '1rem', overflow: 'hidden',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
+              background: '#fff', borderRadius: '1.25rem', overflow: 'hidden',
+              boxShadow: '0 8px 32px rgba(15,23,42,0.12)',
+              border: '1px solid rgba(15,23,42,0.06)',
             }}>
               {/* YouTube channel latest-video embed via channel playlist */}
               <div style={{
                 position: 'relative', paddingBottom: '56.25%', height: 0,
-                background: '#0f1d35',
+                background: '#0b1727',
               }}>
                 <iframe
                   style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
@@ -123,10 +124,10 @@ export default function Sermones() {
                 <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
                   <span className="badge badge-navy">El Sermón del Monte</span>
                   <span className="badge badge-outline">Mateo 5:1-12</span>
-                  <span className="badge" style={{ background: '#f0efea', color: '#4a4a4a' }}>48 min</span>
+                  <span className="badge" style={{ background: '#f1f5f9', color: '#64748b' }}>48 min</span>
                 </div>
                 <h3 style={{ marginBottom: '0.5rem' }}>Las Bienaventuranzas: Fundamento de la Vida Cristiana</h3>
-                <p style={{ color: '#999', fontSize: '0.9rem', marginBottom: '1rem' }}>
+                <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '1rem' }}>
                   Pastor Principal · 15 de junio, 2025
                 </p>
                 <p>
@@ -151,31 +152,33 @@ export default function Sermones() {
       {/* Series */}
       <section className="section">
         <div className="container">
-          <div className="section-title">
+          <div className="section-title animate-on-scroll fade-in">
             <h2>Series de Predicación</h2>
             <div className="section-divider" />
             <p>Estudiamos la Biblia libro por libro y tema por tema de forma sistemática.</p>
           </div>
           <div className="grid-3">
             {series.map((s, i) => (
-              <div key={i} className="card" style={{ border: s.active ? '2px solid #c8a830' : 'none', position: 'relative' }}>
+              <div key={i} className={`card animate-on-scroll delay-${(i + 1) * 100}`}
+                style={{ border: s.active ? '2px solid #c9993b' : '1px solid rgba(15,23,42,0.06)', position: 'relative' }}>
                 {s.active && (
-                  <div style={{
-                    position: 'absolute', top: '1rem', right: '1rem',
-                  }}>
-                    <span className="badge badge-gold" style={{ fontSize: '0.7rem' }}>En Curso</span>
+                  <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+                    <span className="badge badge-gold" style={{ fontSize: '0.68rem' }}>En Curso</span>
                   </div>
                 )}
                 <div className="card-body">
                   <div style={{
-                    width: '48px', height: '48px', background: s.active ? '#c8a830' : '#1a2a4a',
-                    borderRadius: '0.5rem', display: 'flex', alignItems: 'center',
+                    width: '48px', height: '48px',
+                    background: s.active
+                      ? 'linear-gradient(135deg, #c9993b, #e8bf6a)'
+                      : 'linear-gradient(145deg, #152847, #1e3a5f)',
+                    borderRadius: '0.75rem', display: 'flex', alignItems: 'center',
                     justifyContent: 'center', marginBottom: '1rem', fontSize: '1.25rem',
                   }}>📖</div>
                   <h4 style={{ marginBottom: '0.4rem' }}>{s.title}</h4>
-                  <p style={{ color: '#c8a830', fontSize: '0.85rem', fontWeight: 600, marginBottom: '0.75rem' }}>{s.passage}</p>
+                  <p style={{ color: '#c9993b', fontSize: '0.85rem', fontWeight: 600, marginBottom: '0.75rem' }}>{s.passage}</p>
                   <p style={{ fontSize: '0.9rem', marginBottom: '1rem' }}>{s.desc}</p>
-                  <p style={{ fontSize: '0.8rem', color: '#999', marginBottom: 0 }}>{s.count} mensajes</p>
+                  <p style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: 0 }}>{s.count} mensajes</p>
                 </div>
               </div>
             ))}
@@ -186,36 +189,42 @@ export default function Sermones() {
       {/* Recent Sermons List */}
       <section className="section bg-off-white">
         <div className="container">
-          <div className="section-title">
+          <div className="section-title animate-on-scroll fade-in">
             <h2>Mensajes Recientes</h2>
             <div className="section-divider" />
           </div>
           <div style={{ maxWidth: '900px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {sermons.map((s, i) => (
-              <div key={i} style={{
-                background: '#fff', borderRadius: '0.75rem', padding: '1.5rem',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.07)',
+              <div key={i} className={`animate-on-scroll delay-${(i % 3 + 1) * 100}`} style={{
+                background: '#fff', borderRadius: '1rem', padding: '1.5rem',
+                boxShadow: '0 2px 12px rgba(15,23,42,0.07)',
+                border: '1px solid rgba(15,23,42,0.06)',
                 display: 'flex', gap: '1.5rem', alignItems: 'center',
                 flexWrap: 'wrap',
-              }}>
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+              }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateX(4px)'; e.currentTarget.style.boxShadow = '0 6px 24px rgba(15,23,42,0.12)'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 2px 12px rgba(15,23,42,0.07)'; }}
+              >
                 <div style={{
                   flexShrink: 0, width: '52px', height: '52px',
-                  borderRadius: '50%', background: '#1a2a4a',
+                  borderRadius: '50%',
+                  background: 'linear-gradient(145deg, #152847, #1e3a5f)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
-                  <span style={{ color: '#c8a830', fontSize: '1.1rem' }}>▶</span>
+                  <span style={{ color: '#e8bf6a', fontSize: '1.1rem' }}>▶</span>
                 </div>
                 <div style={{ flex: 1, minWidth: '200px' }}>
                   <h5 style={{ marginBottom: '0.3rem' }}>{s.title}</h5>
                   <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                    <span style={{ fontSize: '0.8rem', color: '#999' }}>{s.pastor}</span>
-                    <span style={{ fontSize: '0.8rem', color: '#999' }}>·</span>
-                    <span style={{ fontSize: '0.8rem', color: '#999' }}>{s.date}</span>
+                    <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>{s.pastor}</span>
+                    <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>·</span>
+                    <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>{s.date}</span>
                     <span className="badge badge-outline" style={{ fontSize: '0.72rem' }}>{s.passage}</span>
                   </div>
                 </div>
                 <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexShrink: 0 }}>
-                  <span style={{ fontSize: '0.8rem', color: '#999' }}>{s.duration}</span>
+                  <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>{s.duration}</span>
                   <a
                     href={s.youtubeUrl}
                     target="_blank"
@@ -228,7 +237,7 @@ export default function Sermones() {
               </div>
             ))}
           </div>
-          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+          <div style={{ textAlign: 'center', marginTop: '2.5rem' }} className="animate-on-scroll">
             <a
               href="https://www.youtube.com/@LBDcr"
               target="_blank"
