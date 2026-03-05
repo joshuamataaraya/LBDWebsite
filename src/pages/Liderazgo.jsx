@@ -60,35 +60,35 @@ export default function Liderazgo() {
         </div>
       </section>
 
-      <section className="section-sm" style={{ background: '#f8f7f2', textAlign: 'center' }}>
+      <section className="section-sm" style={{ background: 'var(--color-off-white)', textAlign: 'center' }}>
         <div className="container" style={{ maxWidth: '720px' }}>
-          <blockquote style={{
-            fontFamily: 'Georgia, serif',
+          <blockquote className="animate-on-scroll fade-in" style={{
+            fontFamily: 'var(--font-heading)',
             fontSize: '1.2rem',
             fontStyle: 'italic',
-            color: '#1a2a4a',
+            color: 'var(--color-navy)',
             lineHeight: 1.7,
             marginBottom: '0.75rem',
           }}>
             "Apaciguad la grey de Dios que está entre vosotros, cuidando de ella, no por fuerza, sino voluntariamente... no como teniendo señorío sobre los que están a vuestro cuidado, sino siendo ejemplos de la grey."
           </blockquote>
-          <p style={{ color: '#c8a830', fontWeight: 600, marginBottom: 0 }}>— 1 Pedro 5:2-3</p>
+          <p style={{ color: '#c9993b', fontWeight: 600, marginBottom: 0 }}>— 1 Pedro 5:2-3</p>
         </div>
       </section>
 
       <section className="section">
         <div className="container">
-          <div className="section-title">
+          <div className="section-title animate-on-scroll fade-in">
             <h2>Nuestro Equipo de Liderazgo</h2>
             <div className="section-divider" />
             <p>Personas llamadas por Dios a servir a la iglesia con fidelidad, humildad y dedicación.</p>
           </div>
           <div className="grid-3">
             {leaders.map((leader, i) => (
-              <div key={i} className="card">
+              <div key={i} className={`card animate-on-scroll delay-${(i % 3 + 1) * 100}`}>
                 <div style={{
                   height: '140px',
-                  background: `linear-gradient(135deg, #1a2a4a, #253d6b)`,
+                  background: 'linear-gradient(145deg, #152847, #1e3a5f)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -98,12 +98,13 @@ export default function Liderazgo() {
                   <div style={{
                     width: '80px', height: '80px',
                     borderRadius: '50%',
-                    background: 'rgba(200,168,48,0.2)',
-                    border: '3px solid #c8a830',
+                    background: 'rgba(201,153,59,0.18)',
+                    border: '3px solid #c9993b',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontSize: '2rem',
+                    transition: 'transform 0.3s ease',
                   }}>
                     {i % 2 === 0 ? '👨‍💼' : '👩‍💼'}
                   </div>
@@ -111,17 +112,17 @@ export default function Liderazgo() {
                 <div className="card-body">
                   <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
                     <h4 style={{ marginBottom: '0.25rem' }}>{leader.name}</h4>
-                    <p style={{ color: '#c8a830', fontSize: '0.875rem', fontWeight: 600, marginBottom: '0.25rem' }}>{leader.role}</p>
+                    <p style={{ color: '#c9993b', fontSize: '0.875rem', fontWeight: 600, marginBottom: '0.25rem' }}>{leader.role}</p>
                     <span className="badge badge-navy" style={{ fontSize: '0.72rem' }}>{leader.ministry}</span>
                   </div>
-                  <p style={{ fontSize: '0.875rem', lineHeight: 1.7, marginBottom: '1rem' }}>{leader.bio}</p>
+                  <p style={{ fontSize: '0.875rem', lineHeight: 1.75, marginBottom: '1rem' }}>{leader.bio}</p>
                   <div style={{
-                    borderTop: '1px solid #f0efea', paddingTop: '1rem',
+                    borderTop: '1px solid #f1f5f9', paddingTop: '1rem',
                     marginTop: '0.5rem',
                   }}>
                     <p style={{
-                      fontSize: '0.8rem', color: '#666', fontStyle: 'italic',
-                      lineHeight: 1.6, marginBottom: 0,
+                      fontSize: '0.8rem', color: '#64748b', fontStyle: 'italic',
+                      lineHeight: 1.65, marginBottom: 0,
                     }}>
                       {leader.verse}
                     </p>
@@ -137,7 +138,7 @@ export default function Liderazgo() {
       <section className="section bg-off-white">
         <div className="container">
           <div className="grid-2" style={{ alignItems: 'center', gap: '3rem' }}>
-            <div>
+            <div className="animate-on-scroll slide-left">
               <h2 style={{ marginBottom: '1rem' }}>Gobierno Eclesiástico</h2>
               <div className="section-divider" style={{ margin: '0 0 1.5rem' }} />
               <p style={{ lineHeight: 1.8, marginBottom: '1rem' }}>
@@ -154,20 +155,22 @@ export default function Liderazgo() {
                   'Congregación de creyentes bautizados',
                 ].map((item, i) => (
                   <li key={i} style={{ display: 'flex', gap: '0.5rem', fontSize: '0.95rem' }}>
-                    <span style={{ color: '#c8a830', fontWeight: 700, flexShrink: 0 }}>✓</span>
+                    <span style={{ color: '#c9993b', fontWeight: 700, flexShrink: 0 }}>✓</span>
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
-            <div style={{
-              background: '#1a2a4a', borderRadius: '1rem', padding: '2.5rem',
+            <div className="animate-on-scroll slide-right" style={{
+              background: 'linear-gradient(145deg, #152847, #1e3a5f)',
+              borderRadius: '1.25rem', padding: '2.5rem',
+              boxShadow: '0 20px 60px rgba(21,40,71,0.3)',
             }}>
               <h3 style={{ color: '#fff', marginBottom: '1.5rem' }}>Únase a la Familia</h3>
-              <p style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.8, marginBottom: '1.5rem' }}>
+              <p style={{ color: 'rgba(255,255,255,0.82)', lineHeight: 1.8, marginBottom: '1.5rem' }}>
                 Si desea conocer más sobre nuestra forma de gobierno, nuestros valores o cómo convertirse en miembro de la iglesia, no dude en comunicarse con nosotros.
               </p>
-              <p style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.8, marginBottom: '1.5rem' }}>
+              <p style={{ color: 'rgba(255,255,255,0.82)', lineHeight: 1.8, marginBottom: '1.5rem' }}>
                 Ofrecemos clases de membresía donde explicamos en detalle nuestras creencias, valores y expectativas de la vida de iglesia.
               </p>
               <a href="mailto:info@labibliadicecr.org" className="btn btn-primary">
