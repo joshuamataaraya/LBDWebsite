@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+const CROSS_PATTERN_SVG = "data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c9993b' fill-rule='evenodd'%3E%3Crect x='18' y='8' width='4' height='24'/%3E%3Crect x='8' y='18' width='24' height='4'/%3E%3C/g%3E%3C/svg%3E";
+
 const quickLinks = [
   { icon: '🕐', title: 'Horario de Culto', desc: 'Domingos a las 10:00 a.m.' },
   { icon: '📍', title: 'Ubicación', desc: '100 m norte de la Escuela Ricardo Salas, San Miguel de Santo Domingo, Heredia' },
@@ -47,7 +49,7 @@ export default function Inicio() {
         {/* Subtle cross pattern */}
         <div style={{
           position: 'absolute', inset: 0, pointerEvents: 'none', opacity: 0.04,
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c9993b' fill-rule='evenodd'%3E%3Crect x='18' y='8' width='4' height='24'/%3E%3Crect x='8' y='18' width='24' height='4'/%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundImage: `url("${CROSS_PATTERN_SVG}")`,
         }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>

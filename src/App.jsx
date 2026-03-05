@@ -28,7 +28,7 @@ function ScrollAnimationManager() {
           }
         });
       },
-      { threshold: 0.12 }
+      { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
     );
 
     const observeElements = () => {
@@ -37,11 +37,11 @@ function ScrollAnimationManager() {
         .forEach((el) => observer.observe(el));
     };
 
-    // Small delay to let React render the new page
-    const timer = setTimeout(observeElements, 60);
+    // Use rAF to ensure DOM is painted before observing
+    const raf = requestAnimationFrame(observeElements);
 
     return () => {
-      clearTimeout(timer);
+      cancelAnimationFrame(raf);
       observer.disconnect();
     };
   }, [location.pathname]);
