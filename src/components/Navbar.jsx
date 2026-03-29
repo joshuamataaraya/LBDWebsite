@@ -12,6 +12,7 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('#inicio');
 
   const closeMenu = useCallback(() => setOpen(false), []);
 
@@ -19,6 +20,25 @@ export default function Navbar() {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    const sectionIds = links.map(l => l.href.slice(1));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(`#${entry.target.id}`);
+          }
+        });
+      },
+      { threshold: 0.3, rootMargin: '-80px 0px -40% 0px' }
+    );
+    sectionIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -67,7 +87,13 @@ export default function Navbar() {
         <ul className={`navbar__links${open ? ' navbar__links--open' : ''}`}>
           {links.map((l) => (
             <li key={l.href}>
-              <a href={l.href} onClick={(e) => handleClick(e, l.href)}>{l.label}</a>
+              <a
+                href={l.href}
+                className={activeSection === l.href ? 'navbar__link--active' : ''}
+                onClick={(e) => handleClick(e, l.href)}
+              >
+                {l.label}
+              </a>
             </li>
           ))}
           <li>

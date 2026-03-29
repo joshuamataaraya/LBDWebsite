@@ -71,14 +71,28 @@ const creencias = [
   },
 ];
 
-function AccordionItem({ item, isOpen, toggle }) {
+function AccordionItem({ item, isOpen, toggle, index }) {
+  const panelId = `fe-panel-${index}`;
+  const headerId = `fe-header-${index}`;
   return (
     <div className={`accordion__item${isOpen ? ' accordion__item--open' : ''}`}>
-      <button className="accordion__header" onClick={toggle} aria-expanded={isOpen}>
+      <button
+        id={headerId}
+        className="accordion__header"
+        onClick={toggle}
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+      >
         <span>{item.titulo}</span>
         <span className="accordion__chevron">{isOpen ? '−' : '+'}</span>
       </button>
-      <div className="accordion__body" style={{ maxHeight: isOpen ? '1000px' : '0' }}>
+      <div
+        id={panelId}
+        className="accordion__body"
+        role="region"
+        aria-labelledby={headerId}
+        style={{ maxHeight: isOpen ? '1000px' : '0' }}
+      >
         <p>{item.texto}</p>
       </div>
     </div>
@@ -97,6 +111,7 @@ export default function DeclaracionFe() {
             <AccordionItem
               key={i}
               item={c}
+              index={i}
               isOpen={openIndex === i}
               toggle={() => setOpenIndex(openIndex === i ? null : i)}
             />
