@@ -697,36 +697,132 @@ body.menu-open {
   font-style: italic;
 }
 
-.quienes__gallery {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+/* 3D Coverflow Carousel */
+.carousel {
+  position: relative;
+  padding: 2rem 0 1rem;
+  margin-top: 2.5rem;
 }
 
-.quienes__gallery-item {
-  border-radius: var(--radius-sm);
+.carousel__viewport {
+  position: relative;
+  height: clamp(260px, 32vw, 380px);
+  perspective: 1200px;
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: grab;
+  user-select: none;
+}
+
+.carousel__viewport:active {
+  cursor: grabbing;
+}
+
+/* Edge fade masks */
+.carousel__viewport::before,
+.carousel__viewport::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  z-index: 55;
+  pointer-events: none;
+}
+
+.carousel__viewport::before {
+  left: 0;
+  background: linear-gradient(to right, var(--off-white), transparent);
+}
+
+.carousel__viewport::after {
+  right: 0;
+  background: linear-gradient(to left, var(--off-white), transparent);
+}
+
+.carousel__slide {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(240px, 30vw, 360px);
   aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+  transform:
+    translate(-50%, -50%)
+    translateX(calc(var(--off, 0) * min(18vw, 240px)))
+    rotateY(calc(var(--off, 0) * -25deg))
+    scale(calc(1 - var(--abs, 0) * 0.1));
 }
 
-.quienes__gallery-item:hover {
-  transform: scale(1.03);
-  box-shadow: var(--shadow-md);
-  z-index: 2;
+.carousel__slide--active {
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.2),
+    0 0 40px rgba(255, 189, 0, 0.12);
 }
 
-.quienes__gallery-item img {
+.carousel__slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 30%;
-  transition: transform 0.6s ease;
+  pointer-events: none;
 }
 
-.quienes__gallery-item:hover img {
-  transform: scale(1.08);
+.carousel__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-60%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
+  z-index: 60;
+  backdrop-filter: blur(10px);
+}
+
+.carousel__btn:hover {
+  background: var(--primary);
+  color: var(--dark-deep);
+  transform: translateY(-60%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(255, 189, 0, 0.3);
+}
+
+.carousel__btn--prev { left: 1rem; }
+.carousel__btn--next { right: 1rem; }
+
+.carousel__progress {
+  width: 120px;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 2px;
+  margin: 1.5rem auto 0;
+  overflow: hidden;
+}
+
+.carousel__progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+  border-radius: 2px;
+  transition: width 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.carousel__counter {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-light);
+  font-weight: 500;
+  letter-spacing: 0.15em;
 }
 
 /* ============================================
@@ -1389,9 +1485,18 @@ body.menu-open {
    RESPONSIVE
    ============================================ */
 @media (max-width: 968px) {
-  .quienes__gallery {
-    grid-template-columns: repeat(2, 1fr);
+  .carousel__viewport::before,
+  .carousel__viewport::after {
+    width: 40px;
   }
+
+  .carousel__btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .carousel__btn--prev { left: 0.5rem; }
+  .carousel__btn--next { right: 0.5rem; }
 
   .vm-cards {
     grid-template-columns: 1fr;
@@ -1640,8 +1745,8 @@ body.menu-open {
     display: none;
   }
 
-  .quienes__gallery {
-    grid-template-columns: 1fr;
+  .carousel__viewport {
+    height: 240px;
   }
 }
 
